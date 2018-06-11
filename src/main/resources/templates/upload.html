@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<h1>HashMap</h1>
+<form action="/resultbymap" enctype="multipart/form-data" method="post">
+    <label>
+        选择统计的单词文件：<input type="file" name="file"><br>
+        要统计的词出现次数在<input type="number" name="count" min="0">次以上<br>
+        <input type="submit" value="提交">
+    </label>
+</form>
+<h1>MySQL</h1>
+<form action="/resultbydb" enctype="multipart/form-data" method="post">
+    <label>
+        选择统计的单词文件：<input type="file" name="file"><br>
+        要统计的词出现次数在<input type="number" name="count" min="0">次以上<br>
+        <input type="submit" value="提交">
+    </label>
+</form>
+</body>
+</html>
