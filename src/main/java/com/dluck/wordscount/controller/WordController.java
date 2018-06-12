@@ -4,6 +4,7 @@ import com.dluck.wordscount.Service.FileService;
 import com.dluck.wordscount.Service.WordService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.stereotype.Service;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -53,6 +54,15 @@ public class WordController {
 		return "upload";
 	}
 
+	@GetMapping("/clear")
+	public String clearTable() {
+		if (wordService.clearTable()) {
+			return "upload";
+		}else {
+			return "error";
+		}
+	}
+
 	/**
 	 * 显示词频统计结果，上传文件后，调用此方法，返回result页面。
 	 *
@@ -77,7 +87,7 @@ public class WordController {
 
 	@PostMapping(value = "/resultbymap")
 	public String listWordByList(@RequestParam(value = "file", required = false) MultipartFile file,
-			@RequestParam(value = "count",required = false) Integer count, ModelMap map) {
+	                             @RequestParam(value = "count", required = false) Integer count, ModelMap map) {
 		try {
 			if (file != null) {
 				map.addAttribute("list", fileService.readByHashMap(fileService.getBufferedReader(file.getInputStream()), count));
@@ -85,7 +95,7 @@ public class WordController {
 		} catch (IOException e) {
 			e.printStackTrace();
 			map.addAttribute("msg", "文件读取错误");
-			return "err";
+			return "error";
 		}
 		return "result";
 	}

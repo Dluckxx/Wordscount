@@ -30,6 +30,24 @@ public class WordService {
 		}
 	}
 
+	//清空数据库
+	public boolean clearTable() {
+		wordRepository.deleteAll();
+		List<Word> list = wordRepository.findAll();
+		return list.isEmpty();
+	}
+
+	//从数据库中删除一个word
+	public boolean deleteFronDB(String word) {
+		List<Word> list = wordRepository.findWordByWord(word);
+		if (list.size() != 0) {
+			wordRepository.delete(wordRepository.findWordByWord(word).get(0));
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	//Word添加/增加词频到HashMap
 	void addWordToMap(String word, Map<String, Integer> hashmap) {
 		if (hashmap.containsKey(word))
