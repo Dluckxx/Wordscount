@@ -4,8 +4,27 @@
     <meta charset="UTF-8">
     <title>result</title>
     <style>
+        body {
+            background-color: #ceecf0;
+        }
+
         table {
             border: 1px solid black;
+            margin: 0 auto;
+        }
+
+        .key {
+            width: 100px;
+            background-color: #1b3c59;
+            text-align: center;
+            color: white;
+        }
+
+        .value {
+            width: 100px;
+            background-color: #436e4f;
+            text-align: center;
+            color: white;
         }
     </style>
 </head>
@@ -13,8 +32,8 @@
 <table>
     <tbody>
     <tr th:each="list,listStat:${list}">
-        <td th:text="${list.word}">null</td>
-        <td th:text="${list.count}">0</td>
+        <td class="key" th:text="${list.word}">null</td>
+        <td class="value" th:text="${list.count}">0</td>
     </tr>
     </tbody>
 </table>

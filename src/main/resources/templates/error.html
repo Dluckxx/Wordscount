@@ -3,10 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <title>err</title>
+    <style type="text/css">
+        body {
+            background-color: #fbffa8;
+        }
+
+        h1 {
+            text-align: center;
+            color: #ff5f5f;
+        }
+
+        p {
+            text-align: center;
+            color: #8aae92;
+        }
+
+        a {
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            background-color: #374955;
+            display: block;
+            margin: 0 auto;
+            width: 150px;
+            height: 20px;
+            border-radius: 10px;
+            vertical-align: middle;
+        }
+
+        a:hover {
+            background-color: #92e6e6;
+            color: black;
+            width: 200px;
+            height: 20px;
+            border-radius: 15px;
+            padding: 5px;
+        }
+    </style>
 </head>
 <body>
 <h1>发生了一个错误</h1>
 <p th:text="${msg}">err</p>
-<a href="/">点此跳转到上传文件页面</a>
+<a href="/">点我上传文件</a>
 </body>
 </html>

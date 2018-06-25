@@ -3,24 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
+    <style type="text/css">
+        body {
+            background-color: #aef4a4;
+        }
+
+        .container {
+            position: absolute;
+            text-align: center;
+            border: 6px solid #535238;
+            width: 700px;
+            height: 300px;
+            left: 50%;
+            top: 50%;
+            margin-left: -350px;
+            margin-top: -150px;
+        }
+
+        .hashmap {
+            color: #e36488;
+        }
+        
+        .mysql {
+            color: #79b8d1;
+        }
+    </style>
 </head>
 <body>
-<h2>HashMap(统计单次结果,速度快)</h2>
-<form action="/resultbymap" enctype="multipart/form-data" method="post">
-    <label>
-        选择统计的单词文件：<input type="file" name="file"><br>
-        要统计的词出现次数在<input type="number" name="count" min="0" value="0">次以上<br>
-        <input type="submit" value="提交">
-    </label>
-</form>
-<h2>MySQL(可重复上传文件,统计多次结果,第一次统计需清空缓存)</h2>
-<form action="/resultbydb" enctype="multipart/form-data" method="post">
-    <label>
-        选择统计的单词文件：<input type="file" name="file"><br>
-        要统计的词出现次数在<input type="number" name="count" min="0" value="0">次以上<br>
-        <input type="submit" value="提交">
-        <input type="button" value="清空缓存" name="clear" onclick="location.href='/clear'">
-    </label>
-</form>
+<div class="container">
+    <h2 class="hashmap">HashMap(统计单次结果,速度快)</h2>
+    <form action="/resultbymap" enctype="multipart/form-data" method="post">
+        <label>
+            选择统计的单词文件：<input type="file" name="file"><br>
+            要统计的词出现次数在<input type="number" name="count" min="0" value="0">次以上<br>
+            <input type="submit" value="提交">
+        </label>
+    </form>
+    <h2 class="mysql">MySQL(可重复上传文件,统计多次结果,第一次统计需清空缓存)</h2>
+    <form action="/resultbydb" enctype="multipart/form-data" method="post">
+        <label>
+            选择统计的单词文件：<input type="file" name="file"><br>
+            要统计的词出现次数在<input type="number" name="count" min="0" value="0">次以上<br>
+            <input type="submit" value="提交">
+            <input type="button" value="清空缓存" name="clear" onclick="location.href='/clear'">
+        </label>
+    </form>
+</div>
 </body>
 </html>
