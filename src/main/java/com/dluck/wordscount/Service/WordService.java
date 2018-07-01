@@ -5,7 +5,10 @@ import com.dluck.wordscount.repository.WordRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class WordService {
@@ -58,33 +61,57 @@ public class WordService {
 
 	//排序Map只列出count个以上的数据
 	List<Word> sortMap(Map<String, Integer> map, Integer count) {
-		List<Word> list = new ArrayList<>();
-		List<Map.Entry<String, Integer>> infoIds = new ArrayList<>(map.entrySet());
-		infoIds.sort((o1, o2) -> (o2.getValue()).compareTo(o1.getValue()));
-		for (Map.Entry<String, Integer> infoId : infoIds) {
-			if (infoId.getValue() > count) {
-				Word word = new Word();
-				word.setWord(infoId.getKey());
-				word.setCount(infoId.getValue());
+//		List<Word> list = new ArrayList<>();
+		//		infoIds.sort((o1, o2) -> (o2.getValue()).compareTo(o1.getValue()));
+//		for (Map.Entry<String, Integer> infoId : infoIds) {
+//			if (infoId.getValue() > count) {
+//				Word word = new Word();
+//				word.setWord(infoId.getKey());
+//				word.setCount(infoId.getValue());
+//
+//				list.add(word);
+//			}
+//		}
 
-				list.add(word);
-			}
-		}
-		return list;
+		Map<String, Integer> result = new LinkedHashMap<>();
+		map.entrySet().stream().filter(maps -> maps.getValue() > count).sorted(Map.Entry.<String, Integer>comparingByValue()
+				.reversed()).forEachOrdered(e -> result.put(e.getKey(), e.getValue()));
+
+//		List<Map.Entry<String, Integer>> maplist = new ArrayList<>(result.entrySet());
+		return mapToWord(new ArrayList<>(result.entrySet()));
 	}
 
 	//排序Map
 	List<Word> sortMap(Map<String, Integer> map) {
-		List<Word> list = new ArrayList<>();
-		List<Map.Entry<String, Integer>> infoIds = new ArrayList<>(map.entrySet());
-		infoIds.sort((o1, o2) -> (o2.getValue()).compareTo(o1.getValue()));
-		for (Map.Entry<String, Integer> infoId : infoIds) {
+//		List<Word> list = new ArrayList<>();
+//		List<Map.Entry<String, Integer>> infoIds = new ArrayList<>(map.entrySet());
+//		infoIds.sort((o1, o2) -> (o2.getValue()).compareTo(o1.getValue()));
+//		for (Map.Entry<String, Integer> infoId : infoIds) {
+//			Word word = new Word();
+//			word.setWord(infoId.getKey());
+//			word.setCount(infoId.getValue());
+//
+//			list.add(word);
+//		}
+//		return list;
+		Map<String, Integer> result = new LinkedHashMap<>();
+		map.entrySet().stream().sorted(Map.Entry.<String, Integer>comparingByKey()
+				.reversed()).forEachOrdered(e -> result.put(e.getKey(), e.getValue()));
+
+		return mapToWord(new ArrayList<>(result.entrySet()));
+	}
+
+	//list类型转换
+	private List<Word> mapToWord(List<Map.Entry<String, Integer>> list) {
+		List<Word> result = new ArrayList<>();
+		for (Map.Entry<String, Integer> infoId : list) {
 			Word word = new Word();
 			word.setWord(infoId.getKey());
 			word.setCount(infoId.getValue());
 
-			list.add(word);
+			result.add(word);
 		}
-		return list;
+
+		return result;
 	}
 }

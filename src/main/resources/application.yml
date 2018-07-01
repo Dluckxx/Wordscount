@@ -1,16 +1,3 @@
-server:
-  port: 8080
 spring:
-  mvc:
-    view:
-      prefix: classpath:/templates/
-      suffix: .html
-  datasource:
-    driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/Wordscount?useSSL=false&allowPublicKeyRetrieval=true
-    username: root
-    password: 12345678
-  jpa:
-    hibernate:
-      ddl-auto: create
-    show-sql: true
+  profiles:
+    active: dev
